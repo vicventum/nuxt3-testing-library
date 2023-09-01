@@ -1,7 +1,7 @@
 // import 'vuetify/styles'
 import { createVuetify, } from 'vuetify'
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
-import { mdiThemeLightDark, mdiCartOutline } from '@mdi/js'
+import { mdiThemeLightDark, mdiCartOutline, mdiViewList, mdiApps } from '@mdi/js'
 // import { md1 } from 'vuetify/blueprints'
 // import { VDataTable } from 'vuetify/labs/VDataTable'
 
@@ -26,6 +26,8 @@ export default defineNuxtPlugin(nuxtApp => {
 				...aliases,
 				themeLightDark: mdiThemeLightDark,
 				cartOutline: mdiCartOutline,
+				viewList: mdiViewList,
+				apps: mdiApps,
 			},
 			sets: {
 				mdi,
