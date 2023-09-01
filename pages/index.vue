@@ -3,7 +3,7 @@
 </script>
 
 <template>
-	<v-container id="home" class="my-4 px-0" fluid>
+	<v-container id="home">
 		pito
 	</v-container>		
 </template>

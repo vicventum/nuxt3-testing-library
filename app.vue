@@ -1,7 +1,7 @@
 <template>
-  <v-layout>
+  <v-layout id="inspire">
     <v-main>
-      <NavBar/>
+      <Header/>
       <router-view/>
     </v-main>
   </v-layout>

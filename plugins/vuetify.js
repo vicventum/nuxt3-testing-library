@@ -1,6 +1,7 @@
+// import 'vuetify/styles'
 import { createVuetify, } from 'vuetify'
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
-import { mdiThemeLightDark } from '@mdi/js'
+import { mdiThemeLightDark, mdiCartOutline } from '@mdi/js'
 // import { md1 } from 'vuetify/blueprints'
 // import { VDataTable } from 'vuetify/labs/VDataTable'
 
@@ -18,6 +19,18 @@ export default defineNuxtPlugin(nuxtApp => {
 	const vuetify = createVuetify({
 		// your config will come here
 		ssr: true,
+		icons: {
+			defaultSet: 'mdi',
+			// aliases,
+			aliases: {
+				...aliases,
+				themeLightDark: mdiThemeLightDark,
+				cartOutline: mdiCartOutline,
+			},
+			sets: {
+				mdi,
+			},
+		},
 		// Cambia la versión de Material Design
 		// blueprint: md1,
 		defaults: {
@@ -50,17 +63,6 @@ export default defineNuxtPlugin(nuxtApp => {
 		// components: {
 		// 	VDataTable
 		// }
-		icons: {
-			defaultSet: 'mdi',
-			// aliases,
-			aliases: {
-				...aliases,
-				themeLightDark: mdiThemeLightDark,
-			},
-			sets: {
-				mdi,
-			},
-		},
 	})
 	nuxtApp.vueApp.use(vuetify)
 })
