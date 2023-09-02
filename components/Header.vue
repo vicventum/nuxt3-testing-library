@@ -2,6 +2,7 @@
 import { useTheme } from 'vuetify'
 
 const theme = useTheme()
+const cartStore = useCartStore()
 
 // Cambia el color del tema activo
 function toggleTheme() {
@@ -22,7 +23,7 @@ function toggleTheme() {
       <v-spacer/>
 
       <v-btn stacked @click="navigateTo('/cart')">
-        <v-badge :content="9" color="error">
+        <v-badge :content="cartStore.totalCartProducts" color="error">
           <v-icon icon="$cartOutline" />
         </v-badge>
       </v-btn>

@@ -37,11 +37,11 @@ export const useCartStore = defineStore({
         return acc + 0
       }, 0)
     },
-    // totalProducts() {
-    //   return Object.keys(this.cartContent).reduce((acc, id) => {
-    //     return acc + this.cartContent[id].quantity
-    //   }, 0)
-    // },
+    totalCartProducts() {
+      return Object.keys(this.cartContent).reduce((acc, id) => {
+        return acc + this.cartContent[id].quantity
+      }, 0)
+    },
     // getTheme() {
     //   return this.theme
     // },
