@@ -11,6 +11,7 @@ export const useCartStore = defineStore({
   }),
 
   getters: {
+    // Devuelve el array de productos del carrito (cartContent) pero formateado
     formattedCart() {
       console.log("🚀 ~ formattedCart ~ formattedCart:")
       return Object.keys(this.cartContent).map((productId) => {
@@ -30,20 +31,20 @@ export const useCartStore = defineStore({
     },
     // total() {
     //   return Object.keys(this.cartContent).reduce((acc, id) => {
-    //     const product = products.find((p) => p.id === id);
+    //     const product = products.find((p) => p.id === id)
     //     if (product) {
-    //       return acc + product.price * this.cartContent[id].quantity;
+    //       return acc + product.price * this.cartContent[id].quantity
     //     }
-    //     return acc + 0;
-    //   }, 0);
+    //     return acc + 0
+    //   }, 0)
     // },
     // productsTotal() {
     //   return Object.keys(this.cartContent).reduce((acc, id) => {
-    //     return acc + this.cartContent[id].quantity;
-    //   }, 0);
+    //     return acc + this.cartContent[id].quantity
+    //   }, 0)
     // },
     // getTheme() {
-    //   return this.theme;
+    //   return this.theme
     // },
   },
 
@@ -65,17 +66,25 @@ export const useCartStore = defineStore({
         this.cartContent[productId] = {
           productId,
           quantity: this.cartContent[productId].quantity + 1,
-        };
+        }
       } else {
         this.cartContent[productId] = {
           productId,
           quantity: 1,
-        };
+        }
       }
     },
-    removeProduct(id) {
-      console.log("🚀 ~ removeProduct ~ id:", id)
+    remove(productId) {
+      if (!this.cartContent[productId]) return null
 
+      this.cartContent[productId].quantity -= 1
+
+      if (this.cartContent[productId].quantity === 0) {
+        delete this.cartContent[productId]
+      }
+    },
+    removeProduct(productId) {
+      delete this.cartContent[productId]
     },
   },
 })

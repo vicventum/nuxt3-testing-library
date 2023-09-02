@@ -36,9 +36,9 @@ console.log("🚀 ~ cartStore:", cartStore)
                       <span class="number d-flex align-center pa-3">
                         {{ product.quantity }}
                       </span>
-                      <!-- <span style="cursor: pointer" class="icon d-flex align-center pa-3" @click="cartStore.remove(product.id)">
+                      <span style="cursor: pointer" class="icon d-flex align-center pa-3" @click="cartStore.remove(product.id)">
                         <v-icon icon="$minus" /> 
-                      </span> -->
+                      </span>
                     </div>
                     <p>
                       {{ product.quantity }}
@@ -47,29 +47,29 @@ console.log("🚀 ~ cartStore:", cartStore)
                         {{ product.cost }}
                       </strong>
                     </p>
-                    <!-- <v-btn
+                    <v-btn
                       @click="cartStore.removeProduct(product.id)"
                       icon
                     >
                       <v-icon color="red" icon="$delete" /> 
-                    </v-btn> -->
+                    </v-btn>
                   </div>
                 </v-col>
               </v-row>
             </div>
           </v-card-text>
-          <!-- <v-card-text
+          <v-card-text
             class="text-center"
             v-else
           >
             <v-btn
-              class="mx-auto"
+              class="text-none mx-auto"
               @click="$router.push('/')"
               color="primary"
             >
               Your cart is empty. Fill it
             </v-btn>
-          </v-card-text> -->
+          </v-card-text>
         </v-card>
       </v-col>
       <!-- <v-col
