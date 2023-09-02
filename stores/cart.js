@@ -42,9 +42,9 @@ export const useCartStore = defineStore({
         return acc + this.cartContent[id].quantity
       }, 0)
     },
-    // getTheme() {
-    //   return this.theme
-    // },
+    getTheme() {
+      return this.theme
+    },
   },
 
   actions: {
@@ -84,6 +84,9 @@ export const useCartStore = defineStore({
     },
     removeProduct(productId) {
       delete this.cartContent[productId]
+    },
+    toggleTheme() {
+      this.theme = this.theme === "light" ? "dark" : "light";
     },
   },
 })

@@ -36,7 +36,7 @@ const isGrid = ref(true)
 			</v-row>
 
 			<section v-show="!isGrid">
-				<ProductCardGrid v-for="(product, i) in products" :key="product.id" :product="product"/>
+				<ProductCardGrid v-for="(product, i) in cartStore.products" :key="product.id" :product="product"/>
 			</section>
 		</template>
 	</v-container>		
