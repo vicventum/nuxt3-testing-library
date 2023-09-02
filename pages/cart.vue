@@ -41,9 +41,9 @@ const cartStore = useCartStore()
                     </div>
                     <p>
                       {{ product.quantity }}
-                      X {{ product.price }} =
+                      ✖ {{ product.price }} =
                       <strong>
-                        {{ product.cost }}
+                        $ {{ product.cost }}
                       </strong>
                     </p>
                     <v-btn

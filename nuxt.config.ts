@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     // 'nuxt-icon',
     '@nuxtjs/google-fonts',
     '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
     // Configuración para el tree-shaking
     async (options, nuxt) => {
       // @ts-ignore

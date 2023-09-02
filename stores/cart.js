@@ -3,6 +3,9 @@ import { defineStore } from 'pinia'
 
 export const useCartStore = defineStore({
   id: 'cartStore',
+  persist: {
+    storage: persistedState.localStorage,
+  },
   state: () => ({
     products: [],
     isProductsPending: true,
