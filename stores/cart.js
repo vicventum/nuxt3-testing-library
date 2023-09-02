@@ -29,16 +29,15 @@ export const useCartStore = defineStore({
         }
       })
     },
-    // total() {
-    //   return Object.keys(this.cartContent).reduce((acc, id) => {
-    //     const product = products.find((p) => p.id === id)
-    //     if (product) {
-    //       return acc + product.price * this.cartContent[id].quantity
-    //     }
-    //     return acc + 0
-    //   }, 0)
-    // },
-    // productsTotal() {
+    totalPrice() {
+      return Object.keys(this.cartContent).reduce((acc, id) => {
+        const product = this.products.find((p) => `${p.id}` === id)
+        if (product)
+          return acc + product.price * this.cartContent[id].quantity
+        return acc + 0
+      }, 0)
+    },
+    // totalProducts() {
     //   return Object.keys(this.cartContent).reduce((acc, id) => {
     //     return acc + this.cartContent[id].quantity
     //   }, 0)
