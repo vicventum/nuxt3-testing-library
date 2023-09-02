@@ -1,3 +1,8 @@
+<script setup>
+const cartStore = useCartStore()
+cartStore.fetchAllProducts()
+</script>
+
 <template>
   <v-layout id="inspire">
     <v-main>

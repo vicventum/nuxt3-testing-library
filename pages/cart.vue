@@ -1,5 +1,10 @@
+<script setup>
+const cartStore = useCartStore()
+console.log("🚀 ~ cartStore:", cartStore)
+</script>
+
 <template>
-  <div class="py-6">
+  <v-container id="cart" class="py-6">
     <v-row>
       <v-col md="8">
         <v-card
@@ -7,7 +12,7 @@
           style="max-height: 500px; overflow-y: auto"
         >
           <v-card-title class="mb-5"> My Cart </v-card-title>
-          <v-card-text v-if="cartStore.formattedCart.length">
+          <v-card-text v-if="cartStore.formattedCart?.length">
             <div
               v-for="product in cartStore.formattedCart"
               :key="product.id"
@@ -26,14 +31,14 @@
                   <div class="d-flex justify-space-between align-center no-wrap w-full h-100">
                     <div class="d-flex align-center bg-primary rounded">
                       <span class="icon d-flex align-center pa-3" style="cursor: pointer" @click="cartStore.add(product.id)">
-                        <v-icon> mdi-plus </v-icon>
+                        <v-icon icon="$plus" /> 
                       </span>
                       <span class="number d-flex align-center pa-3">
                         {{ product.quantity }}
                       </span>
-                      <span style="cursor: pointer" class="icon d-flex align-center pa-3" @click="cartStore.remove(product.id)">
-                        <v-icon> mdi-minus </v-icon>
-                      </span>
+                      <!-- <span style="cursor: pointer" class="icon d-flex align-center pa-3" @click="cartStore.remove(product.id)">
+                        <v-icon icon="$minus" /> 
+                      </span> -->
                     </div>
                     <p>
                       {{ product.quantity }}
@@ -42,18 +47,18 @@
                         {{ product.cost }}
                       </strong>
                     </p>
-                    <v-btn
+                    <!-- <v-btn
                       @click="cartStore.removeProduct(product.id)"
                       icon
                     >
-                      <v-icon color="red"> mdi-delete </v-icon>
-                    </v-btn>
+                      <v-icon color="red" icon="$delete" /> 
+                    </v-btn> -->
                   </div>
                 </v-col>
               </v-row>
             </div>
           </v-card-text>
-          <v-card-text
+          <!-- <v-card-text
             class="text-center"
             v-else
           >
@@ -64,10 +69,10 @@
             >
               Your cart is empty. Fill it
             </v-btn>
-          </v-card-text>
+          </v-card-text> -->
         </v-card>
       </v-col>
-      <v-col
+      <!-- <v-col
         v-if="cartStore.total"
         md="4"
       >
@@ -97,16 +102,9 @@
             > Checkout </v-btn>
           </v-card-text>
         </v-card>
-      </v-col>
+      </v-col> -->
     </v-row>
-  </div>
+  </v-container>
 </template>
-
-<script>
-// import {
-//   useCartStore
-// } from '../stores/cart.js'
-// const cartStore = useCartStore()
-</script>
 
 <style lang="scss" scoped></style>

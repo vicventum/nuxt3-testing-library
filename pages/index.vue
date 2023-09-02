@@ -1,14 +1,14 @@
 <script setup>
-const GET_ALL_PRODUCTS_URL = 'https://dummyjson.com/products?limit=10'
-const { data, pending, error } = await useLazyFetch(GET_ALL_PRODUCTS_URL)
-const products = data.value.products
+const cartStore = useCartStore()
+
+
 
 const isGrid = ref(true)
 </script>
 
 <template>
 	<v-container id="home">
-		<div v-if="pending">
+		<div v-if="cartStore.isProductPending">
 		Loading...
 		</div>
 		<template v-else>
@@ -28,7 +28,7 @@ const isGrid = ref(true)
 			<v-row v-show="isGrid">
 				<v-col cols="12">
 					<v-row>
-						<v-col v-for="(product, i) in products" :key="product.id" cols="12" lg="4" sm=6>
+						<v-col v-for="(product, i) in cartStore.products" :key="product.id" cols="12" lg="4" sm=6>
 							<ProductCardList :product="product"/>
 						</v-col>
 					</v-row>

@@ -21,7 +21,7 @@ function toggleTheme() {
 
       <v-spacer/>
 
-      <v-btn to="/cart" stacked>
+      <v-btn stacked @click="navigateTo('/cart')">
         <v-badge :content="9" color="error">
           <v-icon icon="$cartOutline" />
         </v-badge>

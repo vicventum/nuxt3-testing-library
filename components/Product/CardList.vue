@@ -2,6 +2,7 @@
 defineProps({
   product: Object,
 })
+const cartStore = useCartStore()
 </script>
 
 <template>

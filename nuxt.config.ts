@@ -38,5 +38,10 @@ export default defineNuxtConfig({
     ssr: {
       noExternal: ['vuetify']
     }
+  },
+  imports: {
+    dirs: [
+      './stores',
+    ]
   }
 })
