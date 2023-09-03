@@ -7,7 +7,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "test": "vitest --environment happy-dom",
+    "test": "vitest",
     "test:jsdom": "vitest --config ./vitest.config.ts --environment jsdom",
     "test:watch": "vitest --config ./vitest.config.ts --environment happy-dom --watch",
     "test:ui": "vitest --environment happy-dom --watch --ui --open=false",
@@ -27,6 +27,7 @@
     "@testing-library/vue": "^7.0.0",
     "happy-dom": "^10.11.2",
     "nuxt": "^3.7.0",
+    "nuxt-vitest": "^0.10.4",
     "sass": "^1.66.1",
     "unplugin-vue-components": "^0.25.2",
     "vitest": "^0.33.0"
