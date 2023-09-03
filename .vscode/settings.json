@@ -1,0 +1,9 @@
+{
+	"vitest.enable": true,
+	"vitest.commandLine": "npm run test",
+	"vitest.showFailMessages": true,
+	"vitest.include": [
+		"./Dummy.test.js"
+	],
+	"testing.automaticallyOpenPeekView": "never"
+}

@@ -2,6 +2,7 @@
 import { createVuetify, } from 'vuetify'
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
 import { mdiThemeLightDark, mdiCartOutline, mdiViewList, mdiApps, mdiPlus, mdiMinus, mdiDelete } from '@mdi/js'
+// import { defineNuxtPlugin } from '#app'
 // import { md1 } from 'vuetify/blueprints'
 // import { VDataTable } from 'vuetify/labs/VDataTable'
 

@@ -6,21 +6,37 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "test": "vitest --environment happy-dom",
+    "test:jsdom": "vitest --config ./vitest.config.ts --environment jsdom",
+    "test:watch": "vitest --config ./vitest.config.ts --environment happy-dom --watch",
+    "test:ui": "vitest --environment happy-dom --watch --ui --open=false",
+    "test:ui-jsdom": "vitest --watch --ui --open=false",
+    "test:coverage": "vitest --environment happy-dom --coverage"
   },
   "devDependencies": {
     "@mdi/font": "^7.2.96",
     "@mdi/js": "^7.2.96",
     "@nuxt/devtools": "latest",
+    "@nuxt/test-utils": "^3.7.0",
     "@nuxtjs/google-fonts": "^3.0.2",
     "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
+    "@pinia/testing": "^0.1.3",
+    "@testing-library/jest-dom": "^6.1.2",
+    "@testing-library/user-event": "^14.4.3",
+    "@testing-library/vue": "^7.0.0",
+    "happy-dom": "^10.11.2",
     "nuxt": "^3.7.0",
-    "sass": "^1.66.1"
+    "sass": "^1.66.1",
+    "unplugin-vue-components": "^0.25.2",
+    "vitest": "^0.33.0"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.11",
+    "@vitejs/plugin-vue": "^4.3.4",
     "pinia": "^2.1.6",
     "pinia-plugin-persistedstate": "^3.2.0",
+    "unplugin-auto-import": "^0.16.6",
     "vite-plugin-vuetify": "^1.0.2",
     "vuetify": "^3.3.14"
   }
