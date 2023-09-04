@@ -25,7 +25,7 @@ export default defineConfig({
 				// 	'@pinia-plugin-persistedstate/nuxt/dist/runtime/storages': ['persistedState']
 				// }
 			],
-			dirs: ['./stores', './composables', './utils', './plugins'],
+			dirs: ['./stores', './composables', './utils', './plugins', './components'],
 			dts: true,
 		}),
 	],

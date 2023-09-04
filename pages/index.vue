@@ -1,14 +1,14 @@
 <script setup>
 const cartStore = useCartStore()
-
-
-
+await cartStore.fetchAllProducts()
 const isGrid = ref(true)
 </script>
 
 <template>
-	<v-container id="home">
-		<div v-if="cartStore.isProductPending">
+	<v-container id="home" role="index-container">
+		{{ cartStore.isProductsPending }}
+		<!-- {{ cartStore.products }} -->
+		<div v-if="cartStore.isProductsPending">
 		Loading...
 		</div>
 		<template v-else>
@@ -28,6 +28,7 @@ const isGrid = ref(true)
 			<v-row v-show="isGrid">
 				<v-col cols="12">
 					<v-row>
+						<!-- {{ cartStore.products }} -->
 						<v-col v-for="(product, i) in cartStore.products" :key="product.id" cols="12" lg="4" sm=6>
 							<ProductCardList :product="product"/>
 						</v-col>

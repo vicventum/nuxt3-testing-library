@@ -8,13 +8,14 @@ export const useCartStore = defineStore({
   id: 'cartStore',
   persist: {
     // storage: persistedState.localStorage,
-    storage: true,
+    storage: false,
   },
   state: () => ({
     products: [],
     isProductsPending: true,
     cartContent: {},
     theme: 'dark',
+    isTest: true
   }),
 
   getters: {
@@ -55,16 +56,43 @@ export const useCartStore = defineStore({
   },
 
   actions: {
+    test() {
+      // this.products = [
+      //   {
+      //     "id": 1,
+      //     "title": "iPhone 9",
+      //     "description": "An apple mobile which is nothing like apple",
+      //     "price": 549,
+      //     "discountPercentage": 12.96,
+      //     "rating": 4.69,
+      //     "stock": 94,
+      //     "brand": "Apple",
+      //     "category": "smartphones",
+      //     "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+      //     "images": [
+      //       "https://i.dummyjson.com/data/products/1/1.jpg",
+      //       "https://i.dummyjson.com/data/products/1/2.jpg",
+      //       "https://i.dummyjson.com/data/products/1/3.jpg",
+      //       "https://i.dummyjson.com/data/products/1/4.jpg",
+      //       "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+      //     ]
+      //   }
+      // ]
+    },
     async fetchAllProducts() {
-      if (this.products.length) return null
+      console.log("🚀 ~ fetchAllProducts ~ this.products:", this.products, this.cartContent)
+      // this.products = [{ pito: 1 }]
+      // if (this.products.length) return null
 
       const GET_ALL_PRODUCTS_URL = 'https://dummyjson.com/products?limit=10'
       const { data, pending, error } = await useLazyFetch(GET_ALL_PRODUCTS_URL)
-      console.log("🚀 ~ fetchAllProducts ~ data:", data)
-      // const products = data.value.products
-      const products = data.products
+      console.log("🚀 ~ fetchAllProducts ~ data, pending:", data.value, pending.value)
+      const products = data.value.products
+      // const products = data.products
       this.isProductsPending = pending
+      this.isTest = pending
       this.products = products
+      console.log("🚀 ~ fetchAllProducts ~ data:", data.value.products, this.products)
       return products
     },
     // Agrega un nuevo producto al carrito, en forma de objeto con el `id` y la cantidad de productos del mismo tipo seleccionado

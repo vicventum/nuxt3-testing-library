@@ -1,6 +1,6 @@
 <script setup>
-const cartStore = useCartStore()
-cartStore.fetchAllProducts()
+// const cartStore = useCartStore()
+// cartStore.fetchAllProducts()
 </script>
 
 <template>

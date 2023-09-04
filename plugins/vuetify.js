@@ -16,59 +16,59 @@ const myTheme = {
 	},
 }
 
-export default defineNuxtPlugin(nuxtApp => {
-	const vuetify = createVuetify({
-		// your config will come here
-		ssr: true,
-		icons: {
-			defaultSet: 'mdi',
-			// aliases,
-			aliases: {
-				...aliases,
-				themeLightDark: mdiThemeLightDark,
-				cartOutline: mdiCartOutline,
-				viewList: mdiViewList,
-				apps: mdiApps,
-				plus: mdiPlus,
-				minus: mdiMinus,
-				delete: mdiDelete,
-			},
-			sets: {
-				mdi,
-			},
+export const vuetify = createVuetify({
+	// your config will come here
+	ssr: true,
+	icons: {
+		defaultSet: 'mdi',
+		// aliases,
+		aliases: {
+			...aliases,
+			themeLightDark: mdiThemeLightDark,
+			cartOutline: mdiCartOutline,
+			viewList: mdiViewList,
+			apps: mdiApps,
+			plus: mdiPlus,
+			minus: mdiMinus,
+			delete: mdiDelete,
 		},
-		// Cambia la versión de Material Design
-		// blueprint: md1,
-		defaults: {
-			// Modifica la configuración global de los estilos de los componentes
-			global: {
-				ripple: true,
-			},
-			// Modifica la configuración de los estilos de un componente específico (el `v-text-field` en este caso)
-			// VTextField: {
-			// 	variant: 'outlined',
-			// 	color: 'primary',
-			// }
+		sets: {
+			mdi,
 		},
-		// Configura los temas
-		theme: {
-			defaultTheme: 'dark',
-			// themes: {
-			// 	myTheme
-			// }
+	},
+	// Cambia la versión de Material Design
+	// blueprint: md1,
+	defaults: {
+		// Modifica la configuración global de los estilos de los componentes
+		global: {
+			ripple: true,
 		},
-		// Configura los íconos personalizados
-		// icons: {
-		// 	defaultSet: 'custom',
-		// 	sets: {
-		// 		custom
-		// 	},
-		// 	aliases,
-		// },
-		// Agrega componentes adicionales. En este caso el componente de `v-data-table`, de _Vuetify Labs_ (componentes no terminados aún, en estado alpha)
-		// components: {
-		// 	VDataTable
+		// Modifica la configuración de los estilos de un componente específico (el `v-text-field` en este caso)
+		// VTextField: {
+		// 	variant: 'outlined',
+		// 	color: 'primary',
 		// }
-	})
+	},
+	// Configura los temas
+	theme: {
+		defaultTheme: 'dark',
+		// themes: {
+		// 	myTheme
+		// }
+	},
+	// Configura los íconos personalizados
+	// icons: {
+	// 	defaultSet: 'custom',
+	// 	sets: {
+	// 		custom
+	// 	},
+	// 	aliases,
+	// },
+	// Agrega componentes adicionales. En este caso el componente de `v-data-table`, de _Vuetify Labs_ (componentes no terminados aún, en estado alpha)
+	// components: {
+	// 	VDataTable
+	// }
+})
+export default defineNuxtPlugin(nuxtApp => {
 	nuxtApp.vueApp.use(vuetify)
 })
