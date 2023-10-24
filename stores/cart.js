@@ -6,10 +6,10 @@ import { defineStore } from 'pinia'
 
 export const useCartStore = defineStore({
   id: 'cartStore',
-  persist: {
-    // storage: persistedState.localStorage,
-    storage: false,
-  },
+  // persist: {
+  //   // storage: persistedState.localStorage,
+  //   storage: false,
+  // },
   state: () => ({
     products: [],
     isProductsPending: true,
@@ -80,20 +80,32 @@ export const useCartStore = defineStore({
       // ]
     },
     async fetchAllProducts() {
-      console.log("🚀 ~ fetchAllProducts ~ this.products:", this.products, this.cartContent)
-      // this.products = [{ pito: 1 }]
-      // if (this.products.length) return null
-
+      // console.log("🚀 ~ fetchAllProducts ~ this.products:", this.products, this.cartContent)
+      this.products = []
+      if (this.products.length) return null
       const GET_ALL_PRODUCTS_URL = 'https://dummyjson.com/products?limit=10'
+
       const { data, pending, error } = await useLazyFetch(GET_ALL_PRODUCTS_URL)
-      console.log("🚀 ~ fetchAllProducts ~ data, pending:", data.value, pending.value)
+      this.isProductsPending = false
       const products = data.value.products
-      // const products = data.products
-      this.isProductsPending = pending
       this.isTest = pending
       this.products = products
-      console.log("🚀 ~ fetchAllProducts ~ data:", data.value.products, this.products)
+      await new Promise((resolve, reject) =>
+        setTimeout(() => resolve("Here comes the data 🙀"), 2000)
+      );
       return products
+
+      // setTimeout(async () => {
+      //   console.log("antes:")
+      //   const data = await $fetch(GET_ALL_PRODUCTS_URL, {})
+      //   console.log("despues:", data)
+      //   this.isProductsPending = false
+      //   this.isTest = false
+      //   this.products = data.products
+
+      // }, 2000)
+      // console.log("🚀 ~ fetchAllProducts ~ data:")
+      // this.products = []
     },
     // Agrega un nuevo producto al carrito, en forma de objeto con el `id` y la cantidad de productos del mismo tipo seleccionado
     add(productId) {
