@@ -1,3 +1,4 @@
+import '@testing-library/jest-dom'
 import { it, expect, describe, vi } from 'vitest'
 import {
 	getByRole,
@@ -5,67 +6,17 @@ import {
 	render,
 	screen,
 	waitFor,
-} from '@testing-library/vue'
+} from '../test-utils/custom-reder.js'
 import { flushPromises } from '@vue/test-utils'
-import '@testing-library/jest-dom'
-
-import { createTestingPinia } from '@pinia/testing'
-import { useCartStore } from '../stores/cart.js'
-
-import { createVuetify } from 'vuetify'
-// import { vuetify } from '../plugins/vuetify.js'
-
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-
-import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
-import {
-	mdiThemeLightDark,
-	mdiCartOutline,
-	mdiViewList,
-	mdiApps,
-	mdiPlus,
-	mdiMinus,
-	mdiDelete,
-} from '@mdi/js'
-const vuetify = createVuetify({
-	// your config will come here
-	components,
-	directives,
-	ssr: true,
-	icons: {
-		defaultSet: 'mdi',
-		// aliases,
-		aliases: {
-			...aliases,
-			themeLightDark: mdiThemeLightDark,
-			cartOutline: mdiCartOutline,
-			viewList: mdiViewList,
-			apps: mdiApps,
-			plus: mdiPlus,
-			minus: mdiMinus,
-			delete: mdiDelete,
-		},
-		sets: {
-			mdi,
-		},
-	},
-	defaults: {
-		global: {
-			ripple: true,
-		},
-	},
-	theme: {
-		defaultTheme: 'dark',
-	},
-})
 
 import Index from './index.vue'
 
+const mockFetchedData = vi.fn()
+// vi.stubGlobal('defineNuxtPlugin', () => ({ /* your mock implementation... */ }))
+vi.stubGlobal('useLazyFetch', mockFetchedData)
 describe('Index.vue', () => {
 	it('should test', async () => {
-		// vi.stubGlobal('defineNuxtPlugin', () => ({ /* your mock implementation... */ }))
-		vi.stubGlobal('useLazyFetch', async () => ({
+		mockFetchedData.mockImplementationOnce(async () => ({
 			pending: false,
 			error: undefined,
 			data: {
@@ -89,30 +40,18 @@ describe('Index.vue', () => {
 				},
 			},
 		}))
-		render(Index, {
-			global: {
-				plugins: [
-					createTestingPinia({ stubActions: false }),
-					vuetify,
-					// piniaPluginPersistedstate()
-				],
-			},
-		})
+		render(Index)
 		// await flushPromises()
-		let title
+		let product
 		await waitFor(async () => {
-			title = await screen.getByText('iPhone 9')
+			product = await screen.getByText('iPhone 9')
 		})
-		// const store = useCartStore()
-		// console.log("🚀 ~ it ~ store:", store.products)
-
-		// screen.debug()
-		screen.debug(title)
+		screen.debug(product)
+		expect(product).toBeInTheDocument()
 	})
 
 	it('should test', async () => {
-		// vi.stubGlobal('defineNuxtPlugin', () => ({ /* your mock implementation... */ }))
-		vi.stubGlobal('useLazyFetch', async () => ({
+		mockFetchedData.mockImplementationOnce(async () => ({
 			pending: false,
 			error: undefined,
 			data: {
@@ -136,24 +75,13 @@ describe('Index.vue', () => {
 				},
 			},
 		}))
-		render(Index, {
-			global: {
-				plugins: [
-					createTestingPinia({ stubActions: false }),
-					vuetify,
-					// piniaPluginPersistedstate()
-				],
-			},
-		})
+		render(Index)
 		// await flushPromises()
-		let title
+		let product
 		await waitFor(async () => {
-			title = await screen.getByText('iPhone 10')
+			product = await screen.getByText('iPhone 10')
 		})
-		// const store = useCartStore()
-		// console.log("🚀 ~ it ~ store:", store.products)
-
-		// screen.debug()
-		screen.debug(title)
+		screen.debug(product)
+		expect(product).toBeInTheDocument()
 	})
 })

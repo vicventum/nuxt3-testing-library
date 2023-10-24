@@ -1,35 +1,6 @@
 <script setup>
 const cartStore = useCartStore()
 cartStore.fetchAllProducts()
-// const GET_ALL_PRODUCTS_URL = 'https://dummyjson.com/products?limit=10'
-// const cartStore = {
-// 	pending: true,
-// 	products: []
-// }
-
-// const { data, pending, error } = await useLazyFetch(GET_ALL_PRODUCTS_URL)
-// console.log("🚀 ~ setTimeout ~ data, pending:", data, pending)
-
-// watch(
-// 	() => pending,
-// 	() => {
-// 		console.log("🚀 ~ pending:", pending)
-// 	},
-// 	{ immediate: true }
-// 	)
-// 	watch(
-// 		() => data,
-// 		() => {
-// 		console.log("🚀 ~ data:", data)
-// 	},
-// 	{ immediate: true }
-// 	)
-// // setTimeout(async () => {
-// 	cartStore.products = data.value.products
-// 	cartStore.isProductsPending = pending.value
-// 	console.log("🚀🚀 ~ cartStore:", cartStore)
-// // }, 2000)
-// console.log("🚀 ~ cartStore:", cartStore)
 const isGrid = ref(true)
 </script>
 
