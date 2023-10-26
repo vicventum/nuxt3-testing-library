@@ -88,16 +88,17 @@ export const useCartStore = defineStore({
 				'🚀 ~ fetchAllProducts ~ this.isProductsPending:',
 				this.isProductsPending
 			)
-			const { data, pending, error } = await $fetch(GET_ALL_PRODUCTS_URL)
-			console.log(
-				'🚀 ~ fetchAllProducts ~ data, pending, error:',
-				data.value,
-				pending.value,
-				error.value
-			)
+			const data = await $fetch(GET_ALL_PRODUCTS_URL)
+			console.log('🚀 ~ fetchAllProducts ~ data:', data)
+			// console.log(
+			// 	'🚀 ~ fetchAllProducts ~ data, pending, error:',
+			// 	data.value,
+			// 	pending.value,
+			// 	error.value
+			// )
 			this.isProductsPending = false
-			const products = data.value.products
-			this.products = products
+			// const products = data.value.products
+			this.products = data.products
 
 			// await new Promise((resolve, reject) =>
 			// 	setTimeout(() => {
@@ -105,7 +106,7 @@ export const useCartStore = defineStore({
 			// 		reject(error)
 			// 	}, 2000)
 			// )
-			return products
+			// return products
 		},
 		// Agrega un nuevo producto al carrito, en forma de objeto con el `id` y la cantidad de productos del mismo tipo seleccionado
 		add(productId) {

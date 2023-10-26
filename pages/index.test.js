@@ -31,13 +31,7 @@ const productTest = {
 describe('Index.vue', () => {
 	it('should show at least one product to load the page', async () => {
 		mockFetchedData.mockImplementationOnce(async () => ({
-			pending: false,
-			error: undefined,
-			data: {
-				value: {
-					products: [productTest],
-				},
-			},
+			products: [productTest],
 		}))
 
 		await render(Index)
@@ -53,23 +47,15 @@ describe('Index.vue', () => {
 
 	it('should render at least one item in list format when pressing the "Ver en lista" button', async () => {
 		mockFetchedData.mockImplementationOnce(async () => ({
-			pending: false,
-			error: undefined,
-			data: {
-				value: {
-					products: [productTest],
-				},
-			},
+			products: [productTest],
 		}))
 		render(Index)
 
-		// const user = userEvent.setup()
-		// const btnList = screen.getByTitle(/ver en lista/i)
-		// await user.click(btnList)
+		const user = userEvent.setup()
+		const btnList = screen.getByTitle(/ver en lista/i)
+		await user.click(btnList)
 
-		// const product = screen.getByText(productTest.description)
-		// screen.debug()
-		// screen.debug(product)
-		// expect(product).toBeInTheDocument()
+		const product = screen.getByText(productTest.description)
+		expect(product).toBeInTheDocument()
 	})
 })

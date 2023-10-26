@@ -18,7 +18,7 @@ import { flushPromises } from '@vue/test-utils'
 import ProductCollection from './ProductCollection.vue'
 
 const mockFetchedData = vi.fn()
-vi.stubGlobal('useLazyFetch', mockFetchedData)
+vi.stubGlobal('$fetch', mockFetchedData)
 
 const productTest = {
 	id: 1,
@@ -36,39 +36,22 @@ const productTest = {
 describe('ProductCollection.vue', () => {
 	it('should show at least one product to load the page', async () => {
 		mockFetchedData.mockImplementationOnce(() => ({
-			pending: false,
-			error: undefined,
-			data: {
-				value: {
-					products: [productTest],
-				},
-			},
+			products: [productTest],
 		}))
-
-		// Create suspense wrapper for your component
-		const SuspenseWrapperComponent = defineComponent({
-			components: { ProductCollection },
-			template: `
-				<Suspense>
-					<ProductCollection />
-				</Suspense>
-			`,
-		})
-		render(ProductCollection)
-		await flushPromises()
+		// await flushPromises()
 
 		// await asyncRender(Index)
 		// mountWithSuspense(Index)
 		// wrapInSuspense(Index)
 		// await dflushPromises()
 		// await flushPromises()
-		let product
-		await waitFor(async () => {
-			product = await screen.findByText(productTest.title)
-			// screen.debug()
-			// screen.debug(product)
-			expect(product).toBeInTheDocument()
-		})
+		render(ProductCollection)
+		const product = await screen.findByText(productTest.title)
+		expect(product).toBeInTheDocument()
+		screen.debug()
+		// await waitFor(async () => {
+		// 	// screen.debug(product)
+		// })
 	})
 
 	// it('should render at least one item in list format when pressing the "Ver en lista" button', async () => {
