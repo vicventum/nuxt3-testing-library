@@ -1,4 +1,7 @@
 import { render as vtlRender } from '@testing-library/vue'
+import { h, defineComponent, Suspense } from 'vue'
+import { renderAsync } from './render-async.js'
+import { flushPromises } from '@vue/test-utils'
 
 import { createTestingPinia } from '@pinia/testing'
 
@@ -61,5 +64,98 @@ export function render(component) {
 				// piniaPluginPersistedstate()
 			],
 		},
+	})
+}
+
+export function wrapInSuspense() {
+	return defineComponent({
+		render() {
+			return h(
+				'div',
+				{ id: 'root' },
+				h(Suspense, null, {
+					default() {
+						return h(component, props)
+					},
+					fallback: h('div', 'fallback'),
+				})
+			)
+		},
+	})
+}
+
+const SUSPENSE_TEST_TEMPLATE = `
+<div id="TestRoot">
+  <suspense>
+    <async-component v-bind="$attrs" v-on="emitListeners">
+      <template v-for="(_, slot) of $slots" :key="slot" #[slot]="scope">
+        <slot key="" :name="slot" v-bind="scope" />
+      </template>
+    </async-component>
+    <template #fallback>
+      Suspense Fallback
+    </template>
+  </suspense>
+</div>
+`
+function getSuspenseWrapper(component) {
+	return defineComponent({
+		setup(_props, { emit }) {
+			const emitListeners = reactive({})
+			if ('emits' in component && Array.isArray(component.emits)) {
+				for (const emitName of component.emits) {
+					emitListeners[emitName] = (...args) => {
+						emit(emitName, ...args)
+					}
+				}
+			}
+			return {
+				emitListeners,
+			}
+		},
+		emits:
+			'emits' in component && Array.isArray(component.emits)
+				? component.emits
+				: [],
+		components: {
+			AsyncComponent: component,
+		},
+		inheritAttrs: false,
+		template: SUSPENSE_TEST_TEMPLATE,
+	})
+}
+
+export async function asyncRender(component) {
+	// render(getSuspenseWrapper(component))
+	await renderAsync(
+		defineComponent({
+			render() {
+				return h(Suspense, null, {
+					default: h(component),
+					fallback: h('div', 'fallback'),
+				})
+			},
+		})
+	)
+}
+
+export async function mountWithSuspense(component, options) {
+	const wrapper = defineComponent({
+		components: { [component.name]: component },
+		props: Object.keys(options.props ?? {}),
+		template: `<suspense><${component.name} v-bind="$props" /></suspense>`,
+	})
+
+	const result = render(wrapper, options)
+
+	await flushPromises()
+
+	return result
+}
+const scheduler = typeof setImmediate === 'function' ? setImmediate : setTimeout
+
+export function dflushPromises() {
+	return new Promise((resolve) => {
+		scheduler(resolve, 0)
 	})
 }

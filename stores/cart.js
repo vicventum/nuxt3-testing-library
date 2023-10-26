@@ -88,14 +88,14 @@ export const useCartStore = defineStore({
 				'🚀 ~ fetchAllProducts ~ this.isProductsPending:',
 				this.isProductsPending
 			)
-			const { data, pending, error } = await useLazyFetch(GET_ALL_PRODUCTS_URL)
+			const { data, pending, error } = await $fetch(GET_ALL_PRODUCTS_URL)
 			console.log(
 				'🚀 ~ fetchAllProducts ~ data, pending, error:',
 				data.value,
 				pending.value,
 				error.value
 			)
-			this.isProductsPending = pending
+			this.isProductsPending = false
 			const products = data.value.products
 			this.products = products
 
