@@ -35,10 +35,13 @@
   "dependencies": {
     "@pinia/nuxt": "^0.4.11",
     "@vitejs/plugin-vue": "^4.3.4",
-    "pinia": "^2.1.6",
+    "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.0",
     "unplugin-auto-import": "^0.16.6",
     "vite-plugin-vuetify": "^1.0.2",
     "vuetify": "^3.3.14"
+  },
+  "overrides": {
+    "vue": "latest"
   }
 }

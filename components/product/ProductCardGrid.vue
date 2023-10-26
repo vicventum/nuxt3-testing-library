@@ -22,7 +22,7 @@ const cartStore = useCartStore()
           $ {{ product.price }}
         </v-card-subtitle>
         <v-card-text>
-          $ {{ product.description }}
+          {{ product.description }}
         </v-card-text>
         <v-card-actions>
           <v-btn color="primary">

@@ -50,6 +50,8 @@ const vuetify = createVuetify({
 })
 
 export * from '@testing-library/vue'
+// export * from '@testing-library/user-event'
+
 export function render(component) {
 	return vtlRender(component, {
 		global: {
