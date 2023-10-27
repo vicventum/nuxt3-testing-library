@@ -1,4 +1,6 @@
 <script setup>
+import Header from './components/layout/Header.vue'
+
 // const cartStore = useCartStore()
 // cartStore.fetchAllProducts()
 </script>
@@ -6,7 +8,7 @@
 <template>
   <v-layout id="inspire">
     <v-main>
-      <Header/>
+      <Header />
       <router-view/>
     </v-main>
   </v-layout>
