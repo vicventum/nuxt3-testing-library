@@ -26,6 +26,7 @@ const cartStore = useCartStore()
       <v-btn
         color="primary"
         variant="elevated"
+        role="button"
         @click="cartStore.add(product.id)"
       >
         Add to Cart

@@ -22,7 +22,7 @@ function toggleTheme() {
 
       <v-spacer/>
 
-      <v-btn stacked @click="navigateTo('/cart')">
+      <v-btn stacked @click="navigateTo('/cart')" title="Ver carrito">
         <v-badge :content="cartStore.totalCartProducts" color="error">
           <v-icon icon="$cartOutline" />
         </v-badge>

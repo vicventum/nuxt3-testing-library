@@ -9,7 +9,8 @@ import Header from './components/layout/Header.vue'
   <v-layout id="inspire">
     <v-main>
       <Header />
-      <router-view/>
+      <!-- <router-view/> -->
+      <NuxtPage/>
     </v-main>
   </v-layout>
 </template>

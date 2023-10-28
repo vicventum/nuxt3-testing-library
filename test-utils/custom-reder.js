@@ -2,7 +2,7 @@ import { render as vtlRender } from '@testing-library/vue'
 import { h, defineComponent, Suspense } from 'vue'
 import { renderAsync } from './render-async.js'
 import { flushPromises } from '@vue/test-utils'
-
+import {} from '@nuxt/test-utils'
 import { createTestingPinia } from '@pinia/testing'
 
 import { createVuetify } from 'vuetify'
@@ -55,14 +55,41 @@ const vuetify = createVuetify({
 export * from '@testing-library/vue'
 // export * from '@testing-library/user-event'
 
-export function render(component) {
+import { createRouter, createWebHistory } from 'vue-router'
+// import { NuxtPage } from '#build/components.js'
+// import { } from 'nuxt/dist/app/components/index.js'
+const routes = [
+	{
+		path: '/',
+		component: {
+			template: 'Welcome to the blogging app',
+		},
+	},
+]
+const router = createRouter({
+	history: createWebHistory(),
+	routes: routes,
+})
+
+// import Index from '../pages/index.vue'
+export async function render(component, { routes, NuxtPage } = {}) {
+	// router.push('/')
+	// await router.isReady()
 	return vtlRender(component, {
 		global: {
 			plugins: [
 				createTestingPinia({ stubActions: false }),
 				vuetify,
+				// router,
 				// piniaPluginPersistedstate()
 			],
+			stubs: {
+				NuxtPage: false,
+			},
+			components: {
+				// NuxtPage: Index,
+				NuxtPage,
+			},
 		},
 	})
 }

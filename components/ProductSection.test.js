@@ -98,7 +98,7 @@ describe('ProductSection.vue', () => {
 		await waitFor(() => {
 			const errorMessage = screen.getByText(/sorry an error occurred/i)
 			expect(errorMessage).toBeInTheDocument()
-			screen.debug()
+			// screen.debug()
 		})
 	})
 })
