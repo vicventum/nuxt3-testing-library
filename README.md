@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# Nuxt 3 y Testing Library
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Aplicación sencilla con Nuxt 3 y Pinia donde se prueba el uso de Testing Library para la creación de tests
 
 ## Setup
 

@@ -1,19 +1,7 @@
-import { h, defineComponent, Suspense } from 'vue'
 import '@testing-library/jest-dom'
 import { it, expect, describe, vi } from 'vitest'
-import {
-	getByRole,
-	getByText,
-	render,
-	asyncRender,
-	screen,
-	waitFor,
-	wrapInSuspense,
-	mountWithSuspense,
-	dflushPromises,
-} from '../test-utils/custom-reder.js'
+import { render, screen, waitFor } from '../test-utils/custom-reder.js'
 import userEvent from '@testing-library/user-event'
-import { flushPromises } from '@vue/test-utils'
 
 import ProductSection from './ProductSection.vue'
 
@@ -44,14 +32,12 @@ describe('ProductSection.vue', () => {
 
 		render(ProductSection)
 
-		// screen.debug()
 		let loadingMessage = screen.getByText(/loading/i)
 		expect(loadingMessage).toBeInTheDocument()
 
 		await waitFor(async () => {
 			loadingMessage = screen.queryByText(/loading/i)
 			expect(loadingMessage).not.toBeInTheDocument()
-			// screen.debug(loadingMessage)
 		})
 	})
 
@@ -61,15 +47,9 @@ describe('ProductSection.vue', () => {
 		}))
 
 		render(ProductSection)
-		// screen.debug()
-		// await flushPromises()
 
 		const product = await screen.findByText(productTest.title)
 		expect(product).toBeInTheDocument()
-		// screen.debug()
-		// await waitFor(async () => {
-		// 	// screen.debug(product)
-		// })
 	})
 
 	it('should render at least one item in list format when pressing the "Ver en lista" button', async () => {
@@ -78,15 +58,12 @@ describe('ProductSection.vue', () => {
 		}))
 
 		render(ProductSection)
-		// await flushPromises()
 
 		const user = userEvent.setup()
 		const btnList = screen.getByTitle(/ver en lista/i)
 		await user.click(btnList)
 
 		const product = screen.getByText(productTest.description)
-		// screen.debug()
-		// screen.debug(product)
 		expect(product).toBeInTheDocument()
 	})
 
@@ -98,7 +75,6 @@ describe('ProductSection.vue', () => {
 		await waitFor(() => {
 			const errorMessage = screen.getByText(/sorry an error occurred/i)
 			expect(errorMessage).toBeInTheDocument()
-			// screen.debug()
 		})
 	})
 })
