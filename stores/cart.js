@@ -82,15 +82,20 @@ export const useCartStore = defineStore({
 			// console.log("🚀 ~ fetchAllProducts ~ this.products:", this.products, this.cartContent)
 			this.products = []
 			if (this.products.length) return null
-			const GET_ALL_PRODUCTS_URL = 'https://dummyjson.com/products?limit=10'
+			const GET_ALL_PRODUCTS_URL = 'https://-dummyjson.com/products?limit=10'
 
 			// const { data, pending } = await useLazyFetch(GET_ALL_PRODUCTS_URL)
 			// this.isProductsPending = pending
 			// this.products = data.value.products
-			const data = await $fetch(GET_ALL_PRODUCTS_URL)
-			console.log('🚀 ~ fetchAllProducts ~ data:', data)
-			this.isProductsPending = false
-			this.products = data.products
+			try {
+				const data = await $fetch(GET_ALL_PRODUCTS_URL)
+				console.log('🚀 ~ fetchAllProducts ~ data:', data)
+				this.isProductsPending = false
+				this.products = data.products
+			} catch (error) {
+				console.error('🚀 ~ fetchAllProducts ~ error:', error)
+				throw error
+			}
 
 			// await new Promise((resolve, reject) =>
 			// 	setTimeout(() => {

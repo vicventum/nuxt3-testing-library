@@ -3,12 +3,12 @@ defineProps({
   isGrid: Boolean
 })
 const cartStore = useCartStore()
-await cartStore.fetchAllProducts()
-// const GET_ALL_PRODUCTS_URL = 'https://dummyjson.com/products?limit=10'
-// const { data, pending, error } = await useLazyFetch(GET_ALL_PRODUCTS_URL)
-// const cartStore = {}
-// cartStore.products = data.value.products
-// cartStore.isProductsPending = pending.value
+try {
+  await cartStore.fetchAllProducts()
+} catch (error) {
+  console.error("🚀 ~ error:", error)
+  throw error
+}
 </script>
 
 <template>

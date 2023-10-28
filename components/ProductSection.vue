@@ -3,6 +3,12 @@ import ProductCollection from './product/ProductCollection.vue'
 defineProps({
   isGrid: Boolean
 })
+const error = ref(false)
+onErrorCaptured((err) => {
+	console.error("🚀 ~ onErrorCaptured ~ err:", err)
+	error.value = 'Sorry an error occurred'
+	return false
+})
 // const cartStore = useCartStore()
 // await cartStore.fetchAllProducts()
 </script>
@@ -21,12 +27,13 @@ defineProps({
 				</v-btn>
 			</v-col>
 		</v-row>
-		<Suspense>
+		<p v-if="error">{{ error }}</p>
+		<Suspense v-else>
 			<template #default>
 				<ProductCollection :is-grid="isGrid" />
 			</template>
 			<template #fallback>
-				Loading... 2
+				Loading...
 			</template>
 		</Suspense>
 	</div>

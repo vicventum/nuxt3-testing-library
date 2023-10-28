@@ -34,16 +34,39 @@ const productTest = {
 	images: ['https://i.dummyjson.com/data/products/1/1.jpg'],
 }
 describe('ProductSection.vue', () => {
+	it('should show a loading message while data is received and then disappear', async () => {
+		mockFetchedData.mockImplementationOnce(
+			() =>
+				new Promise((res) =>
+					setTimeout(() => res({ products: [productTest] }), 200)
+				)
+		)
+
+		render(ProductSection)
+
+		// screen.debug()
+		let loadingMessage = screen.getByText(/loading/i)
+		expect(loadingMessage).toBeInTheDocument()
+
+		await waitFor(async () => {
+			loadingMessage = screen.queryByText(/loading/i)
+			expect(loadingMessage).not.toBeInTheDocument()
+			// screen.debug(loadingMessage)
+		})
+	})
+
 	it('should show at least one product to load the page', async () => {
 		mockFetchedData.mockImplementationOnce(() => ({
 			products: [productTest],
 		}))
 
 		render(ProductSection)
-		await flushPromises()
+		// screen.debug()
+		// await flushPromises()
+
 		const product = await screen.findByText(productTest.title)
 		expect(product).toBeInTheDocument()
-		screen.debug()
+		// screen.debug()
 		// await waitFor(async () => {
 		// 	// screen.debug(product)
 		// })
@@ -62,8 +85,20 @@ describe('ProductSection.vue', () => {
 		await user.click(btnList)
 
 		const product = screen.getByText(productTest.description)
-		screen.debug()
-		screen.debug(product)
+		// screen.debug()
+		// screen.debug(product)
 		expect(product).toBeInTheDocument()
+	})
+
+	it('should show an error message when the HTTP call throws an error', async () => {
+		mockFetchedData.mockRejectedValueOnce(new Error())
+
+		render(ProductSection)
+
+		await waitFor(() => {
+			const errorMessage = screen.getByText(/sorry an error occurred/i)
+			expect(errorMessage).toBeInTheDocument()
+			screen.debug()
+		})
 	})
 })
